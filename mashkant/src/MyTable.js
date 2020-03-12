@@ -59,7 +59,8 @@ export default function MyTable() {
   return(rows)
     }
 
-useEffect(()=>{console.log(rows)},[rows])
+useEffect(()=>{console.log(rows)},[rows]);
+
   const classes = useStyles();
 
   return (
