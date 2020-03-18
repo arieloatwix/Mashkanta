@@ -15,42 +15,47 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 
-/* const useStyles = makeStyles({ 
-  
-});*/
 
 
-
-const Row = () => {
-  return(
-    <TableRow key={Math.random()}>
-      <TableCell>
-      <Select labelId="label" id="select" value="20">
-  <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
-  <MenuItem value="20">Twenty</MenuItem>
-</Select>  
-</TableCell>
-      <TableCell><TextField key={Math.random()} id={Math.random()+ "standard-basic1"} label="orel"/> </TableCell> 
-      <TableCell><TextField key={Math.random()} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
-      <TableCell><TextField key={Math.random()} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-      <TableCell><TextField key={Math.random()} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-     </TableRow>
-)
-}
 
 export default function MyTable() {
+
+  const [rows, setRows]=useState([0]);
+  const[info,setInfo]=useState(null);
   
-  const [rows, setRows]=useState([0])
-  useEffect(()=>{console.log(rows)},[rows]);
+  const Row = (rowKey) => {
+   
+    return(
+      <TableRow>
+        <TableCell>
+        <Select labelId="label" id="select" value="20">
+    <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
+    <MenuItem value="20">Twenty</MenuItem>
+  </Select>  
+  </TableCell>
+        <TableCell><TextField onChange={e=>{handleRowChange(e)}} key="1" id={Math.random()+ "standard-basic1"} label="orel"></TextField> </TableCell> 
+        <TableCell><TextField onChange={handleRowChange} key="2" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
+        <TableCell><TextField onChange={handleRowChange} key="3" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+        <TableCell><TextField onChange={handleRowChange(rowKey,4)} key="4" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+       </TableRow>
+  )
+  }
+  
+
+
  
    function handleAdd(){
-
-
-    let newRow=1; 
-    
+    let newRow=rows.length; 
     setRows([...rows, newRow])
       return(rows)
     }
+
+    function handleRowChange(e){
+
+    setInfo(e)
+   
+    }
+
 
 
 
@@ -72,14 +77,14 @@ export default function MyTable() {
         <TableBody>
 
      {rows.map((row)=>(
-     <Row key = {row}></Row>
+     <Row rowKey={row} key={row}></Row>
      )
      )}
      
         </TableBody>
       </Table>
-      <Fab color="primary" aria-label="add" >
-        <AddIcon onClick={handleAdd} />
+      <Fab  onClick={handleAdd} color="primary" aria-label="add" >
+        <AddIcon/>
       </Fab>
     </TableContainer>
   );
