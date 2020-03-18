@@ -21,9 +21,15 @@ import AddIcon from '@material-ui/icons/Add';
 export default function MyTable() {
 
   const [rows, setRows]=useState([0]);
-  const[info,setInfo]=useState(null);
+ 
   
   const Row = (rowKey) => {
+    const[info,setInfo]=useState(" ");
+    function handleRowChange(e,v){
+      
+      setInfo(v);
+      console.log(info);
+      }
    
     return(
       <TableRow>
@@ -33,10 +39,10 @@ export default function MyTable() {
     <MenuItem value="20">Twenty</MenuItem>
   </Select>  
   </TableCell>
-        <TableCell><TextField onChange={e=>{handleRowChange(e)}} key="1" id={Math.random()+ "standard-basic1"} label="orel"></TextField> </TableCell> 
-        <TableCell><TextField onChange={handleRowChange} key="2" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
-        <TableCell><TextField onChange={handleRowChange} key="3" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-        <TableCell><TextField onChange={handleRowChange(rowKey,4)} key="4" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+        <TableCell><TextField onChange={e=>{e.preventDefault(); handleRowChange(e,e.target.value)}} key="1" id={Math.random()+ "standard-basic1"} label="orel" value={info}></TextField> </TableCell> 
+        <TableCell><TextField  key="2" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
+        <TableCell><TextField  key="3" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+        <TableCell><TextField  key="4" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
        </TableRow>
   )
   }
@@ -50,11 +56,7 @@ export default function MyTable() {
       return(rows)
     }
 
-    function handleRowChange(e){
-
-    setInfo(e)
-   
-    }
+    
 
 
 
@@ -77,7 +79,7 @@ export default function MyTable() {
         <TableBody>
 
      {rows.map((row)=>(
-     <Row rowKey={row} key={row}></Row>
+     <Row rowKey={row} key={1}></Row>
      )
      )}
      
