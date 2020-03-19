@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   select:{
-paddingBottom:"0px"
+  paddingBottom:"0px"
 
   }
 
@@ -40,47 +40,46 @@ paddingBottom:"0px"
 
 
 
+const Row = (rowKey) => {
+  const classes = useStyles();
+  const [info, setInfo]=useState("");
+  function handleRowChange(e,v){
+    setInfo(v);
+      console.log("change")
+    }
+
+ 
+  return(
+    <TableRow>
+      <TableCell className={classes.select}>
+      <Select labelId="label" id="select" value="20">
+  <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
+  <MenuItem value="20">Twenty</MenuItem>
+</Select>  
+</TableCell>
+      <TableCell><TextField onChange={e=>{ console.log(e); e.preventDefault(); handleRowChange(e,e.target.value)}} key={ rowKey+"1"} id={Math.random()+ "standard-basic1"} label="orel" value={info}></TextField> </TableCell> 
+      <TableCell><TextField  key={rowKey+"2"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
+      <TableCell><TextField  key={rowKey+"3"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+      <TableCell><TextField  key={rowKey+"4"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+     </TableRow>
+)
+}
+
+
+
+
 export default function MyTable() {
 
   const classes = useStyles();
-
   const [rows, setRows]=useState([0]);
- 
-  
-  const Row = (rowKey) => {
-    const[info,setInfo]=useState("מפצ ");
-    function handleRowChange(e,v){
-      
-      setInfo(v);
-      console.log(info);
-      }
-   
-    return(
-      <TableRow>
-        <TableCell className={classes.select}>
-        <Select labelId="label" id="select" value="20">
-    <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
-    <MenuItem value="20">Twenty</MenuItem>
-  </Select>  
-  </TableCell>
-        <TableCell><TextField onChange={e=>{e.preventDefault(); handleRowChange(e,e.target.value)}} key="1" id={Math.random()+ "standard-basic1"} label="orel" value={info}></TextField> </TableCell> 
-        <TableCell><TextField  key="2" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
-        <TableCell><TextField  key="3" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-        <TableCell><TextField  key="4" id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-       </TableRow>
-  )
-  }
   
 
-
- 
    function handleAdd(){
     let newRow=rows.length; 
     setRows([...rows, newRow])
       return(rows)
     }
 
-    
 
 
 
@@ -104,7 +103,7 @@ export default function MyTable() {
         <TableBody>
 
      {rows.map((row)=>(
-     <Row rowKey={row} key={1}></Row>
+     <Row rowKey={row} key={"row"+row}></Row>
      )
      )}
      
