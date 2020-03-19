@@ -11,20 +11,44 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Fab from '@material-ui/core/Fab';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
 
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  extendedIcon: {
+    margin: theme.spacing(1),
+  },
 
+  fab:{
+    margin:"10px"
+  },
+
+  select:{
+paddingBottom:"0px"
+
+  }
+
+
+}));
 
 
 
 export default function MyTable() {
 
+  const classes = useStyles();
+
   const [rows, setRows]=useState([0]);
  
   
   const Row = (rowKey) => {
-    const[info,setInfo]=useState(" ");
+    const[info,setInfo]=useState("מפצ ");
     function handleRowChange(e,v){
       
       setInfo(v);
@@ -33,7 +57,7 @@ export default function MyTable() {
    
     return(
       <TableRow>
-        <TableCell>
+        <TableCell className={classes.select}>
         <Select labelId="label" id="select" value="20">
     <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
     <MenuItem value="20">Twenty</MenuItem>
@@ -64,6 +88,7 @@ export default function MyTable() {
  /*  const classes = useStyles(); */
   
   return (
+    <div style={{maxWidth:"1200px",margin: "0 auto"}}>
     
     <TableContainer component={Paper}>
       <Table  aria-label="simple table">
@@ -85,9 +110,18 @@ export default function MyTable() {
      
         </TableBody>
       </Table>
-      <Fab  onClick={handleAdd} color="primary" aria-label="add" >
+      <div style={{float:'right'}}>
+      <Fab variant="extended" className={classes.fab} onClick={handleAdd} color="primary" aria-label="add" >
+        Add a Row
         <AddIcon/>
       </Fab>
+      
+      <Fab variant="extended" className={classes.fab} onClick={handleAdd} color="primary" aria-label="add" >
+      Submit
+        <ChevronRightIcon/>
+      </Fab>
+      </div>
     </TableContainer>
+    </div>
   );
 }
