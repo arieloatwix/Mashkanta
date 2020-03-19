@@ -52,7 +52,7 @@ const Row = (rowKey) => {
   return(
     <TableRow>
       <TableCell className={classes.select}>
-      <Select labelId="label" id="select" value="20">
+      <Select labelId="label" id="select"  label="choose">
   <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
   <MenuItem value="20">Twenty</MenuItem>
 </Select>  
@@ -115,7 +115,7 @@ export default function MyTable() {
         <AddIcon/>
       </Fab>
       
-      <Fab variant="extended" className={classes.fab} onClick={handleAdd} color="primary" aria-label="add" >
+      <Fab variant="extended" className={classes.fab} color="primary" aria-label="add" >
       Submit
         <ChevronRightIcon/>
       </Fab>
