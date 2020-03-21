@@ -41,26 +41,31 @@ const useStyles = makeStyles(theme => ({
 
 
 const Row = (rowKey) => {
+  const [info, setInfo]=useState([{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""}]);
   const classes = useStyles();
-  const [info, setInfo]=useState("");
-  function handleRowChange(e,v){
-    setInfo(v);
-      console.log("change")
+  let temp = info.map(l => Object.assign({}, l));
+
+  function handleRowChange(row,cell,value){      
+    temp[row][cell]=value
+      setInfo(temp);
+      console.log(info)
+      
+      
     }
 
  
   return(
     <TableRow>
       <TableCell className={classes.select}>
-      <Select labelId="label" id="select"  label="choose">
+      <Select labelId="label" id="select"  label="choose" value="">
   <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
   <MenuItem value="20">Twenty</MenuItem>
 </Select>  
 </TableCell>
-      <TableCell><TextField onChange={e=>{ console.log(e); e.preventDefault(); handleRowChange(e,e.target.value)}} key={ rowKey+"1"} id={Math.random()+ "standard-basic1"} label="orel" value={info}></TextField> </TableCell> 
-      <TableCell><TextField  key={rowKey+"2"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell>
-      <TableCell><TextField  key={rowKey+"3"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
-      <TableCell><TextField  key={rowKey+"4"} id={Math.random()+ "standard-basic1"} label="Standard"/> </TableCell> 
+      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"route",e.target.value)}} key={ rowKey.rowKey+"route"} id={Math.random()+ "standard-basic1"} label="orel" value={temp[rowKey.rowKey].route}></TextField> </TableCell> 
+      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"period",e.target.value)}}  key={rowKey.rowKey+"period"} id={Math.random()+ "standard-basic1"} label="Standard" value={temp[rowKey.rowKey].period}/> </TableCell>
+      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"interest",e.target.value)}}  key={rowKey.rowKey+"interest"} id={Math.random()+ "standard-basic1"} label="Standard" value={temp[rowKey.rowKey].interest}/> </TableCell> 
+      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"madad",e.target.value)}}  key={rowKey.rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" vvalue={temp[rowKey.rowKey].madad}/> </TableCell> 
      </TableRow>
 )
 }
@@ -69,6 +74,7 @@ const Row = (rowKey) => {
 
 
 export default function MyTable() {
+  
 
   const classes = useStyles();
   const [rows, setRows]=useState([0]);
@@ -103,7 +109,7 @@ export default function MyTable() {
         <TableBody>
 
      {rows.map((row)=>(
-     <Row rowKey={row} key={"row"+row}></Row>
+     <Row rowKey={row} key={row}></Row>
      )
      )}
      
