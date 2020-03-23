@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Row ({rowKey,handleRowChange,info}){
   
-  const classes=useStyles;
+  const classes=useStyles();
   return(
     <TableRow key={rowKey}>
       <TableCell className={classes.select}>
