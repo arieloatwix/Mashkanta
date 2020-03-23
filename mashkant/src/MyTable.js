@@ -40,32 +40,21 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const Row = (rowKey) => {
-  const [info, setInfo]=useState([{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""}]);
-  const classes = useStyles();
-  let temp = info.map(l => Object.assign({}, l));
-
-  function handleRowChange(row,cell,value){      
-    temp[row][cell]=value
-      setInfo(temp);
-      console.log(info)
-      
-      
-    }
-
- 
+const Row = ({rowKey,handleRowChange,info}) => {
+  
+  const classes=useStyles;
   return(
-    <TableRow>
+    <TableRow key={rowKey}>
       <TableCell className={classes.select}>
       <Select labelId="label" id="select"  label="choose" value="">
   <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
   <MenuItem value="20">Twenty</MenuItem>
 </Select>  
 </TableCell>
-      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"route",e.target.value)}} key={ rowKey.rowKey+"route"} id={Math.random()+ "standard-basic1"} label="orel" value={temp[rowKey.rowKey].route}></TextField> </TableCell> 
-      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"period",e.target.value)}}  key={rowKey.rowKey+"period"} id={Math.random()+ "standard-basic1"} label="Standard" value={temp[rowKey.rowKey].period}/> </TableCell>
-      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"interest",e.target.value)}}  key={rowKey.rowKey+"interest"} id={Math.random()+ "standard-basic1"} label="Standard" value={temp[rowKey.rowKey].interest}/> </TableCell> 
-      <TableCell><TextField onChange={e=>{ handleRowChange(rowKey.rowKey,"madad",e.target.value)}}  key={rowKey.rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" vvalue={temp[rowKey.rowKey].madad}/> </TableCell> 
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"route",e.target.value)}} key={rowKey+"route"}  id={Math.random()+ "standard-basic1"} label="orel" value={info[rowKey].route}></TextField> </TableCell> 
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"period",e.target.value)}}  key={rowKey+"period"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].period}/> </TableCell>
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"interest",e.target.value)}}  key={rowKey+"interest"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].interest}/> </TableCell> 
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"madad",e.target.value)}}  key={rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" vvalue={info[rowKey].madad}/> </TableCell> 
      </TableRow>
 )
 }
@@ -74,11 +63,19 @@ const Row = (rowKey) => {
 
 
 export default function MyTable() {
+  const classes=useStyles;
   
-
-  const classes = useStyles();
+  const [info, setInfo]=useState([{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""},{route:"",period:"",interest:"",madad:""}]);
   const [rows, setRows]=useState([0]);
+
   
+  let temp = info.map(l => Object.assign({}, l));  
+  function handleRowChange(row,cell,value){    
+    let temp = info.map(l => Object.assign({}, l));   
+    temp[row][cell]=value
+      setInfo(temp);
+    console.log(info)
+  }
 
    function handleAdd(){
     let newRow=rows.length; 
@@ -86,11 +83,6 @@ export default function MyTable() {
       return(rows)
     }
 
-
-
-
-
- /*  const classes = useStyles(); */
   
   return (
     <div style={{maxWidth:"1200px",margin: "0 auto"}}>
@@ -109,7 +101,7 @@ export default function MyTable() {
         <TableBody>
 
      {rows.map((row)=>(
-     <Row rowKey={row} key={row}></Row>
+     <Row info={temp} handleRowChange={handleRowChange} rowKey={row} key={row}></Row>
      )
      )}
      
