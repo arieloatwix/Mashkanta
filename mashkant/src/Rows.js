@@ -49,7 +49,7 @@ export default function Row ({rowKey,handleRowChange,info}){
       </TableCell>
       <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"period",e.target.value)}}  key={rowKey+"period"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].period}/> </TableCell>
       <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"interest",e.target.value)}}  key={rowKey+"interest"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].interest}/> </TableCell> 
-      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"madad",e.target.value)}}  key={rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].madad}/> </TableCell> 
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"madad",e.target.value)}}  key={rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].madad }/> </TableCell> 
      </TableRow>
 )
 }

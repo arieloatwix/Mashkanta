@@ -57,6 +57,9 @@ const MyTable = ({ submit }) => {
   function handleRowChange(row, cell, value) {
     let temp = info.map(l => Object.assign({}, l));
     temp[row][cell] = value;
+    if(temp[row].route==1 || temp[row].route==4 || temp[row].route==5){
+      temp[row].madad=0;
+     } 
     setInfo(temp);
   }
 
