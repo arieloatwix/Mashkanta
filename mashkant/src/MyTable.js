@@ -41,12 +41,12 @@ const useStyles = makeStyles(theme => ({
 const MyTable = ({ submit }) => {
   const classes = useStyles();
   const [info, setInfo] = useState([
-    { route: "", period: "", interest: "", madad: "" },
-    { route: "", period: "", interest: "", madad: "" },
-    { route: "", period: "", interest: "", madad: "" },
-    { route: "", period: "", interest: "", madad: "" },
-    { route: "", period: "", interest: "", madad: "" },
-    { route: "", period: "", interest: "", madad: "" }
+    { sum: "", route: "", period: "", interest: "", madad: "" },
+    { sum: "", route: "", period: "", interest: "", madad: "" },
+    { sum: "", route: "", period: "", interest: "", madad: "" },
+    { sum: "", route: "", period: "", interest: "", madad: "" },
+    { sum: "", route: "", period: "", interest: "", madad: "" },
+    { sum: "", route: "", period: "", interest: "", madad: "" }
   ]);
   const [rows, setRows] = useState([0]);
 

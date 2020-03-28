@@ -7,7 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -37,16 +36,20 @@ export default function Row ({rowKey,handleRowChange,info}){
   const classes=useStyles();
   return(
     <TableRow key={rowKey}>
+      
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"sum",e.target.value)}} key={rowKey+"sum"}  id={Math.random()+ "standard-basic1"} label="sum" value={info[rowKey].sum}></TextField> </TableCell> 
       <TableCell className={classes.select}>
-      <Select labelId="label" id="select"  label="choose" value="">
-  <MenuItem id="standard-basic1" value="10">Ten</MenuItem>
-  <MenuItem value="20">Twenty</MenuItem>
-</Select>  
-</TableCell>
-      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"route",e.target.value)}} key={rowKey+"route"}  id={Math.random()+ "standard-basic1"} label="orel" value={info[rowKey].route}></TextField> </TableCell> 
+        <Select labelId="label" id="select" onChange={e=>{handleRowChange(rowKey,"route",e.target.value)}} label="choose" value={info[rowKey].route}>
+          <MenuItem   value={1}>prime</MenuItem>
+          <MenuItem   value={2}>mishtana tzmuda</MenuItem>
+          <MenuItem   value={3}>mishtana lo tzmuda</MenuItem>
+          <MenuItem   value={4}>const</MenuItem>
+          <MenuItem   value={5}>const lo tzamud</MenuItem>
+        </Select>  
+      </TableCell>
       <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"period",e.target.value)}}  key={rowKey+"period"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].period}/> </TableCell>
       <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"interest",e.target.value)}}  key={rowKey+"interest"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].interest}/> </TableCell> 
-      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"madad",e.target.value)}}  key={rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" vvalue={info[rowKey].madad}/> </TableCell> 
+      <TableCell><TextField onChange={e=>{handleRowChange(rowKey,"madad",e.target.value)}}  key={rowKey+"madad"} id={Math.random()+ "standard-basic1"} label="Standard" value={info[rowKey].madad}/> </TableCell> 
      </TableRow>
 )
 }
