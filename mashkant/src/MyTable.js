@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
 
   select: {
     paddingBottom: "0px"
+  },
+  head: {
+    fontWeight: "600"
   }
 }));
 
@@ -57,9 +60,9 @@ const MyTable = ({ submit }) => {
   function handleRowChange(row, cell, value) {
     let temp = info.map(l => Object.assign({}, l));
     temp[row][cell] = value;
-    if(temp[row].route==1 || temp[row].route==4 || temp[row].route==5){
-      temp[row].madad=0;
-     } 
+    if (temp[row].route == 1 || temp[row].route == 4 || temp[row].route == 5) {
+      temp[row].madad = 0;
+    }
     setInfo(temp);
   }
 
@@ -79,11 +82,11 @@ const MyTable = ({ submit }) => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Sum</TableCell>
-              <TableCell>route</TableCell>
-              <TableCell>period</TableCell>
-              <TableCell>interest</TableCell>
-              <TableCell>Madad</TableCell>
+              <TableCell className={classes.head}>Sum</TableCell>
+              <TableCell className={classes.head}>route</TableCell>
+              <TableCell className={classes.head}>period</TableCell>
+              <TableCell className={classes.head}>interest</TableCell>
+              <TableCell className={classes.head}>Madad</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
