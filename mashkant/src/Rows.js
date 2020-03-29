@@ -114,7 +114,7 @@ export default function Row({ rowKey, handleRowChange, info }) {
             id={Math.random() + "standard-basic1"}
             label="Standard"
             value={info[rowKey].madad}
-          />
+          />{" "}
           {info[rowKey].madad === 0 && (
             <FormHelperText className={classes.helper}>
               No madad for you kapara
