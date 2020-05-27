@@ -25,7 +25,7 @@ export function PMT(ir, np, pv, fv, type) {
   return -pmt;
 }
 
-export function monthlyReturns(ir, np, pv, fv, type) {
+/* export function monthlyReturns(ir, np, pv, fv, type) {
   let pmt = null;
   let monthsArray = Array.from(Array(parseInt(np)).keys());
 
@@ -42,4 +42,19 @@ export function monthlyReturns(ir, np, pv, fv, type) {
   for (var j = 0; j < monthsArray.length; j++) {
     sum += monthsArray[j];
   }
+} */
+export function monthlyReturns(ir, np, pv, fv, type) {
+  console.log("hi");
+  let pmt;
+  let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+  for (let i in monthsArray) {
+    pmt = PMT(ir, np, pv, fv, type);
+    monthsArray[i] = pmt;
+  }
+  let sum = 0;
+  for (var j = 0; j < monthsArray.length; j++) {
+    sum += monthsArray[j];
+  }
+  console.log(sum);
 }
