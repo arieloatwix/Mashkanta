@@ -19,37 +19,32 @@ import { submit } from "./redux/actions/table";
 
 import { connect } from "react-redux";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   extendedIcon: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
 
   fab: {
-    margin: "10px"
+    margin: "10px",
   },
 
   select: {
-    paddingBottom: "0px"
+    paddingBottom: "0px",
   },
   head: {
-    fontWeight: "600"
-  }
+    fontWeight: "600",
+  },
 }));
 
 const MyTable = ({ submit }) => {
   const classes = useStyles();
   const [info, setInfo] = useState([
     { sum: "", route: "", period: "", interest: "", madad: "" },
-    { sum: "", route: "", period: "", interest: "", madad: "" },
-    { sum: "", route: "", period: "", interest: "", madad: "" },
-    { sum: "", route: "", period: "", interest: "", madad: "" },
-    { sum: "", route: "", period: "", interest: "", madad: "" },
-    { sum: "", route: "", period: "", interest: "", madad: "" }
   ]);
   const [rows, setRows] = useState([0]);
 
@@ -58,12 +53,10 @@ const MyTable = ({ submit }) => {
   });
 
   function handleRowChange(row, cell, value) {
-    let temp = info.map(l => Object.assign({}, l));
+    let temp = info.map((l) => Object.assign({}, l));
     temp[row][cell] = value;
     if (temp[row].route == 1 || temp[row].route == 4 || temp[row].route == 5) {
       temp[row].madad = 0;
-    } else {
-      temp[row].madad = "";
     }
     setInfo(temp);
   }
@@ -84,7 +77,7 @@ const MyTable = ({ submit }) => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={classes.head}>Sum</TableCell>
+              <TableCell className={classes.head}>Route Sum</TableCell>
               <TableCell className={classes.head}>route</TableCell>
               <TableCell className={classes.head}>period</TableCell>
               <TableCell className={classes.head}>interest</TableCell>
@@ -92,7 +85,7 @@ const MyTable = ({ submit }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <Row
                 info={info}
                 handleRowChange={handleRowChange}
