@@ -9,35 +9,35 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   extendedIcon: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
 
   fab: {
-    margin: "10px"
+    margin: "10px",
   },
 
   select: {
     minWidth: 150,
 
     paddingLeft: "10px",
-    textAlign: "left"
+    textAlign: "left",
   },
   label: {
     display: "inline-block",
-    marginRight: "-55px"
+    marginRight: "-55px",
   },
   helper: {
     position: "absolute",
     top: "43px",
-    color: "red"
-  }
+    color: "red",
+  },
 }));
 
 export default function Row({ rowKey, handleRowChange, info }) {
@@ -46,7 +46,7 @@ export default function Row({ rowKey, handleRowChange, info }) {
     <TableRow key={rowKey}>
       <TableCell>
         <TextField
-          onChange={e => {
+          onChange={(e) => {
             handleRowChange(rowKey, "sum", e.target.value);
           }}
           key={rowKey + "sum"}
@@ -66,25 +66,25 @@ export default function Row({ rowKey, handleRowChange, info }) {
             id="select"
             inputProps={{
               name: "age",
-              id: "age-native-simple"
+              id: "age-native-simple",
             }}
-            onChange={e => {
+            onChange={(e) => {
               handleRowChange(rowKey, "route", e.target.value);
             }}
             value={info[rowKey].route}
           >
-            <MenuItem value={1}>prime</MenuItem>
-            <MenuItem value={2}>mishtana tzmuda</MenuItem>
-            <MenuItem value={3}>mishtana lo tzmuda</MenuItem>
-            <MenuItem value={4}>const</MenuItem>
-            <MenuItem value={5}>const lo tzamud</MenuItem>
+            <MenuItem value={0}>prime</MenuItem>
+            <MenuItem value={1}>mishtana tzmuda</MenuItem>
+            <MenuItem value={2}>mishtana lo tzmuda</MenuItem>
+            <MenuItem value={3}>const</MenuItem>
+            <MenuItem value={4}>const lo tzamud</MenuItem>
           </Select>
         </FormControl>
       </TableCell>
 
       <TableCell>
         <TextField
-          onChange={e => {
+          onChange={(e) => {
             handleRowChange(rowKey, "period", e.target.value);
           }}
           key={rowKey + "period"}
@@ -95,7 +95,7 @@ export default function Row({ rowKey, handleRowChange, info }) {
       </TableCell>
       <TableCell>
         <TextField
-          onChange={e => {
+          onChange={(e) => {
             handleRowChange(rowKey, "interest", e.target.value);
           }}
           key={rowKey + "interest"}
@@ -107,7 +107,7 @@ export default function Row({ rowKey, handleRowChange, info }) {
       <TableCell>
         <FormControl className={classes.formControl}>
           <TextField
-            onChange={e => {
+            onChange={(e) => {
               handleRowChange(rowKey, "madad", e.target.value);
             }}
             key={rowKey + "madad"}

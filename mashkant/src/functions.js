@@ -1,4 +1,5 @@
-export function PMT(ir, np, pv, fv, type) {
+import { data } from "./Data/data";
+export function PMT(ir, np, pv, fv, madad) {
   /*
    * ir   - interest rate per month
    * np   - number of periods (months)
@@ -10,18 +11,16 @@ export function PMT(ir, np, pv, fv, type) {
    */
 
   var pmt, pvif;
-  np = np;
+
   fv || (fv = 0);
-  type || (type = 0);
+  let type = 0;
 
   if (ir === 0) return -(pv + fv) / np;
   else ir *= 0.01 / 12;
   pvif = Math.pow(1 + ir, np);
 
   pmt = (-ir * pv * (pvif + fv)) / (pvif - 1);
-
-  if (type === 1) pmt /= 1 + ir;
-
+  console.log(pvif);
   return -pmt;
 }
 
@@ -43,18 +42,97 @@ export function PMT(ir, np, pv, fv, type) {
     sum += monthsArray[j];
   }
 } */
-export function monthlyReturns(ir, np, pv, fv, type) {
-  console.log("hi");
-  let pmt;
-  let monthsArray = Array.from(Array(parseInt(np)).keys());
+export function monthlyReturns(ir, np, pv, fv, madad, type) {
+  const inflation = data("inflation");
 
-  for (let i in monthsArray) {
-    pmt = PMT(ir, np, pv, fv, type);
-    monthsArray[i] = pmt;
+  switch (type) {
+    case 0:
+      {
+        const prime = data("prime");
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+        for (let i in monthsArray) {
+          let primeCurrent = (i === 0 && i) || prime[i].value;
+
+          pmt = PMT(
+            prime[i].value,
+            np - i,
+            pv - (pmt - primeCurrent * pv),
+            fv,
+            madad
+          );
+          monthsArray[i] = pmt;
+        }
+        let sum = 0;
+        for (var j = 0; j < monthsArray.length; j++) {
+          sum += monthsArray[j];
+        }
+      }
+      break;
+    case 1:
+      {
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+        for (let i in monthsArray) {
+          pmt = PMT(ir, np, pv, fv, madad, type);
+          monthsArray[i] = pmt;
+        }
+        let sum = 0;
+        for (var j = 0; j < monthsArray.length; j++) {
+          sum += monthsArray[j];
+        }
+        console.log(sum);
+      }
+      break;
+    case 2:
+      {
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+        for (let i in monthsArray) {
+          pmt = PMT(ir, np, pv, fv, madad, type);
+          monthsArray[i] = pmt;
+        }
+        let sum = 0;
+        for (var j = 0; j < monthsArray.length; j++) {
+          sum += monthsArray[j];
+        }
+        console.log(sum);
+      }
+      break;
+    case 3:
+      {
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+        for (let i in monthsArray) {
+          pmt = PMT(ir, np, pv, fv, madad, type);
+          monthsArray[i] = pmt;
+        }
+        let sum = 0;
+        for (var j = 0; j < monthsArray.length; j++) {
+          sum += monthsArray[j];
+        }
+        console.log(sum);
+      }
+      break;
+    case 4:
+      {
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+
+        for (let i in monthsArray) {
+          pmt = PMT(ir, np, pv, fv, madad, type);
+          monthsArray[i] = pmt;
+        }
+        let sum = 0;
+        for (var j = 0; j < monthsArray.length; j++) {
+          sum += monthsArray[j];
+        }
+        console.log(sum);
+      }
+      break;
   }
-  let sum = 0;
-  for (var j = 0; j < monthsArray.length; j++) {
-    sum += monthsArray[j];
-  }
-  console.log(sum);
 }
