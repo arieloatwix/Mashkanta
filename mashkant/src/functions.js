@@ -1,5 +1,9 @@
 import { data } from "./Data/data";
-export function PMT(ir, np, pv, fv, madad) {
+export function PMT(ir, np, pv, fv) {
+  console.log("np", np);
+  console.log("ir", ir);
+  console.log("pv", pv);
+  console.log("fv", fv);
   /*
    * ir   - interest rate per month
    * np   - number of periods (months)
@@ -20,7 +24,7 @@ export function PMT(ir, np, pv, fv, madad) {
   pvif = Math.pow(1 + ir, np);
 
   pmt = (-ir * pv * (pvif + fv)) / (pvif - 1);
-  console.log(pvif);
+
   return -pmt;
 }
 
@@ -46,52 +50,56 @@ export function monthlyReturns(ir, np, pv, fv, madad, type) {
   const inflation = data("inflation");
 
   switch (type) {
-    case 0:
+    case 0: //prime
       {
         const prime = data("prime");
-        let pmt;
+        let pmt = 0;
         let monthsArray = Array.from(Array(parseInt(np)).keys());
 
         for (let i in monthsArray) {
           let primeCurrent = (i === 0 && i) || prime[i].value;
-
-          pmt = PMT(
-            prime[i].value,
-            np - i,
-            pv - (pmt - primeCurrent * pv),
-            fv,
-            madad
-          );
+          console.log("pc", primeCurrent);
+          if (i != 0) {
+            pv = pv - (pmt - (primeCurrent * pv) / 1200);
+          }
+          pmt = PMT(prime[i].value, np - i, pv, fv);
           monthsArray[i] = pmt;
         }
         let sum = 0;
         for (var j = 0; j < monthsArray.length; j++) {
-          sum += monthsArray[j];
-        }
-      }
-      break;
-    case 1:
-      {
-        let pmt;
-        let monthsArray = Array.from(Array(parseInt(np)).keys());
-
-        for (let i in monthsArray) {
-          pmt = PMT(ir, np, pv, fv, madad, type);
-          monthsArray[i] = pmt;
-        }
-        let sum = 0;
-        for (var j = 0; j < monthsArray.length; j++) {
-          sum += monthsArray[j];
+          if (monthsArray) sum += monthsArray[j];
         }
         console.log(sum);
       }
       break;
-    case 2:
+    case 1: // Mishtana Tsmuda
       {
         let pmt;
         let monthsArray = Array.from(Array(parseInt(np)).keys());
-
+        let sum = 0;
+        let basicz = data("basicZ");
+        let k;
         for (let i in monthsArray) {
+          k = Math.round(i / 60);
+          ir = basicz[k].value;
+          monthsArray[k] = pmt;
+          madad = parseInt(data("inflation")[i].value);
+          pv = parseInt(pv);
+          pv += (pv * madad) / 100;
+          sum += monthsArray[i];
+          pmt = PMT(ir, np, pv, fv);
+        }
+
+        console.log(sum);
+      }
+      break;
+    case 2: // Mishtana Lo Tsmuda
+      {
+        let pmt;
+        let monthsArray = Array.from(Array(parseInt(np)).keys());
+        let basicz = parseInt(data("basicZ"));
+        for (let i in monthsArray) {
+          ir = basicz[i / 60];
           pmt = PMT(ir, np, pv, fv, madad, type);
           monthsArray[i] = pmt;
         }

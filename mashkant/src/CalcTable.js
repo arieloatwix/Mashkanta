@@ -12,7 +12,7 @@ import Fab from "@material-ui/core/Fab";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
-import Row from "./Rows";
+import Row from "./CalcTableRow";
 import { submit } from "./redux/actions/table";
 
 //Redux

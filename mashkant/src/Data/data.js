@@ -727,5 +727,14 @@ export function data(what) {
       { x: 29.833333333333332, value: 2.7563615551394305 },
       { x: 29.916666666666668, value: 2.7572277435391035 },
     ]);
+  } else if (what === "basicZ") {
+    return [
+      { value: -0.58 },
+      { value: 0.21 },
+      { value: 0.84 },
+      { value: 1.36 },
+      { value: 1.68 },
+      { value: 1.86 },
+    ];
   }
 }

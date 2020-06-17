@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import MyTable from "./MyTable";
+import MyTable from "./CalcTable";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,16 +11,16 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 const App = () => {
