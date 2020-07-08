@@ -117,7 +117,7 @@ export default function Row({ rowKey, handleRowChange, info }) {
           />{" "}
           {info[rowKey].madad === 0 && (
             <FormHelperText className={classes.helper}>
-              No madad for you kapara
+              No madad
             </FormHelperText>
           )}
         </FormControl>
