@@ -737,4 +737,14 @@ export function data(what) {
       { value: 1.86 },
     ];
   }
+  else if (what === "basicLoZ") {
+    return [
+      { value: 0.43 },
+      { value: 0.84 },
+      { value: 1.52 },
+      { value: 1.95 },
+      { value: 2.19 },
+      { value: 2.3 },
+    ];
+  }
 }
